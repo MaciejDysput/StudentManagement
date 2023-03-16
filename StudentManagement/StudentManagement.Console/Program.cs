@@ -1,5 +1,7 @@
 ﻿using StudentManagement.Console;
 bool menu = false;
+var students = new List<Student>();
+var student = new Student();
 do
 {
 
@@ -11,8 +13,7 @@ do
    
 
 
-    var students = new List<Student>();
-    var student = new Student();
+    
     switch (option)
     {
         case 1:
