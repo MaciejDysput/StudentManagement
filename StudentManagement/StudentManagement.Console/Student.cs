@@ -8,20 +8,27 @@ namespace StudentManagement.Console
 {
     public class Student
     {
-        public string Name { get; set; }
-        public string Surname { get; set; }
-        public string Occupation { get; set; }
-        public int Age { get; set; }
-        public double Id { get; set; }
 
+        public string Name { get; init; }
+        public string Surname { get; init; }
+        public string Occupation { get; init; }
+        public int Age { get; init; }
+        public double Id { get; init; } = Math.Round(Random.Shared.NextDouble() * 10);
+
+        //public bool CzyUzupelnione()
+        //{
+        //    return !string.IsNullOrEmpty(Name) && !string.IsNullOrEmpty(Surname);
+        //}
 
         public string GetFullInfo()
         {
+
             return $"Student name is {Name} {Surname}." +
                 $"He studies {Occupation}" +
                 $" His id is {Id}" +
                 $"And he is {Age} years old";
         }
+
 
     }
 
