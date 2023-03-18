@@ -1,6 +1,6 @@
-﻿using StudentManagement.Console;
-
-
+﻿using Newtonsoft.Json;
+using StudentManagement.Console;
+using System.Text;
 
 bool menu = true;
 var students = new List<Student>();
@@ -32,7 +32,7 @@ do
 
             Console.WriteLine("Enter student surname");
             surname = Console.ReadLine();
-            while (string.IsNullOrWhiteSpace(surname) || surname.Length > 3)
+            while (string.IsNullOrWhiteSpace(surname))
             {
                 Console.WriteLine("Surname cannot be empty. Please enter your surname:");
                 surname = Console.ReadLine();
@@ -54,8 +54,11 @@ do
 
             var student = new Student() { Name = name, Surname = surname, Occupation = occupation, Age = Age };
             Console.WriteLine($"Student id is {student.Id}");
-            Console.WriteLine("Succesfully added a student. {0} {1} studies {2}. His id is {3} and he is {4}", student.Name, student.Surname, student.Occupation, student.Id, student.Age);
+            Console.WriteLine("Succesfully added a student. {0} {1} studies {2}. His id is {3} and he is {4}\n", student.Name, student.Surname, student.Occupation, student.Id, student.Age);
             students.Add(student);
+            
+            
+            
             break;
         case 2:
 
@@ -68,6 +71,7 @@ do
             //{
             //    Console.WriteLine(studentList);
             //}
+            
             break;
         default: break;
     }
