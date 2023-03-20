@@ -1,17 +1,40 @@
-﻿using StudentManagement.Console;
+﻿using Newtonsoft.Json;
+using StudentManagement.Console;
+using System.Text;
+
+
 
 bool menu = true;
 var students = new List<Student>();
 string name, surname, occupation;
 int age, id;
 
+
+
 do
 {
+
+    string filePath = @"C:\Users\macie\source\repos\StudentManagement\file2.json";
+    var studentJson = JsonConvert.SerializeObject(students);
+    if (File.Exists(filePath))
+    {
+        Console.WriteLine("The JSON file exists.");
+
+    }
+    else
+    {
+        Console.WriteLine("Json file doesn't exist");
+
+    }
     Console.WriteLine("Press 1 to insert student");
     Console.WriteLine("Press 2 to display student info");
+    Console.WriteLine("Press 3 to create a students list data");
+    Console.WriteLine("Press 4 to check a students list");
 
     Console.WriteLine("\nChoose Option");
     int option = int.Parse(Console.ReadLine());
+
+
 
     switch (option)
     {
@@ -51,6 +74,12 @@ do
             Console.WriteLine("Succesfully added a student. {0} {1} studies {2}. His id is {3} and he is {4}\n", student.Name, student.Surname, student.Occupation, student.Id, student.Age);
             students.Add(student);
 
+
+
+
+            Console.WriteLine(studentJson);
+
+
             break;
         case 2:
 
@@ -61,8 +90,23 @@ do
 
             }
 
-            break;
 
+            break;
+        case 3:
+            if (!File.Exists(filePath))
+            {
+                Console.WriteLine("Creating a new json file...");
+                File.Create(filePath).Close();
+
+            }
+            break;
+        case 4:
+
+            File.WriteAllText(filePath, studentJson, Encoding.UTF8);
+            string readText = File.ReadAllText(filePath);
+            Console.WriteLine(readText);
+            students = JsonConvert.DeserializeObject<List<Student>>(readText);
+            break;
         default: break;
     }
     Console.WriteLine("Back to Menu? y/n");
