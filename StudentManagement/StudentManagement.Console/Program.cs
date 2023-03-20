@@ -7,6 +7,9 @@ var students = new List<Student>();
 string name, surname, occupation;
 int age, id;
 
+
+
+
 do
 {
     string filePath = @"C:\Users\macie\source\repos\StudentManagement\file.json";
@@ -24,6 +27,7 @@ do
     Console.WriteLine("Press 4 to check a students list");
     Console.WriteLine("Press 5 to delete a student from students list");
     Console.WriteLine("Press 6 to edit student");
+    Console.WriteLine("Press 7 to add a grade to a student");
 
     Console.WriteLine("\nChoose Option");
     int option = int.Parse(Console.ReadLine());
@@ -75,7 +79,7 @@ do
         case 3:
             if (!File.Exists(filePath))
             {
-                Console.WriteLine("Creating a new json file...");
+                Console.WriteLine("Creating a new json file");
                 File.Create(filePath).Close();
             }
             break;
@@ -126,7 +130,26 @@ do
                 Console.WriteLine($"Student with id: {studentToEdit} not found");
             }
             break;
-        default: break;
+
+        case 7:
+            Console.WriteLine("Enter the ID of student you want to assign a grade");
+            double gradeById = double.Parse(Console.ReadLine());
+            Student gradeForStudent = students.Find(s => s.Id == gradeById);
+            if (gradeForStudent != null)
+            {
+                Console.WriteLine($"Enter a grade you want to assign for {gradeForStudent.Name}");
+                double grade = double.Parse(Console.ReadLine());
+                gradeForStudent.Grades = grade;
+                Console.WriteLine($"{ gradeForStudent.Name} received a {grade}");
+            }
+            else
+            {
+                Console.WriteLine($"Student with id:{gradeForStudent} not found ");
+            }
+                break;
+
+        default: 
+            break;
     }
     Console.WriteLine("Back to Menu? y/n");
     char c = char.Parse(Console.ReadLine());
