@@ -10,11 +10,10 @@ string name, surname, occupation;
 int age, id;
 
 
-
 do
 {
 
-    string filePath = @"C:\Users\macie\source\repos\StudentManagement\file2.json";
+    string filePath = @"C:\Users\macie\source\repos\StudentManagement\file.json";
     var studentJson = JsonConvert.SerializeObject(students);
     if (File.Exists(filePath))
     {
@@ -30,6 +29,7 @@ do
     Console.WriteLine("Press 2 to display student info");
     Console.WriteLine("Press 3 to create a students list data");
     Console.WriteLine("Press 4 to check a students list");
+    Console.WriteLine("Press 5 to delete a student from students list");
 
     Console.WriteLine("\nChoose Option");
     int option = int.Parse(Console.ReadLine());
@@ -76,10 +76,6 @@ do
 
 
 
-
-            Console.WriteLine(studentJson);
-
-
             break;
         case 2:
 
@@ -106,6 +102,22 @@ do
             string readText = File.ReadAllText(filePath);
             Console.WriteLine(readText);
             students = JsonConvert.DeserializeObject<List<Student>>(readText);
+            break;
+        case 5:
+
+            Console.Write("Enter the ID of the student to remove: ");
+            int studentToDelete = int.Parse(Console.ReadLine());
+
+            Student personToDelete = students.Find(s => s.Id == studentToDelete);
+            if (personToDelete != null)
+            {
+                students.Remove(personToDelete);
+                Console.WriteLine($"Student with id: {studentToDelete} is deleted from database");
+            }
+            else
+            {
+                Console.WriteLine($"Student with id: {studentToDelete} is not found");
+            }
             break;
         default: break;
     }
