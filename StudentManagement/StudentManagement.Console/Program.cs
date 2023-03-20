@@ -53,12 +53,9 @@ do
 
             break;
         case 2:
-
-            Student[] arrayOfStudents = students.ToArray();
-            for (int i = 0; i < arrayOfStudents.Length; i++)
+            foreach (var studentList in students)
             {
-                Console.WriteLine(arrayOfStudents[i].Name + " " + arrayOfStudents[i].Surname + " " + "studies" + " " + arrayOfStudents[i].Occupation + " " + "He is " + arrayOfStudents[i].Age + " " + "years old. His id is" + " " + arrayOfStudents[i].Id);
-
+                Console.WriteLine(studentList.Name);
             }
 
             break;
