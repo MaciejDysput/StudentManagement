@@ -9,7 +9,7 @@
         public string Occupation { get; set; }
         public int Age { get; set; }
 
-        public double Grades { get; set; }
+        public List<StudentGrade> Grades { get; private init; } = new List<StudentGrade>();
         public int Id { get; init; } = Random.Shared.Next(1, 1000);
 
 
