@@ -1,15 +1,30 @@
-﻿using StudentManagement.Console;
+﻿using Newtonsoft.Json;
+using StudentManagement.Console;
+using System.Text;
 
 bool menu = true;
 var students = new List<Student>();
 string name, surname, occupation;
 int age, id;
 
+string filePath = @"C:\Users\macie\source\repos\StudentManagement\file.json";
+if (File.Exists(filePath))
+{
+    Console.WriteLine("The JSON file exists.");
+    string readText = File.ReadAllText(filePath);
+    students = JsonConvert.DeserializeObject<List<Student>>(readText);
+}
+else
+{
+    Console.WriteLine("Json file doesn't exist");
+}
+
 do
 {
     Console.WriteLine("Press 1 to insert student");
     Console.WriteLine("Press 2 to display student info");
-
+    Console.WriteLine("Press 3 to create a students list data");
+    Console.WriteLine("Press 4 to check a students list");
     Console.WriteLine("\nChoose Option");
     int option = int.Parse(Console.ReadLine());
 
@@ -44,8 +59,6 @@ do
                 Console.WriteLine("Incorrect value, Please enter your age:");
             }
             int Age = age;
-
-
             var student = new Student() { Name = name, Surname = surname, Occupation = occupation, Age = Age };
             Console.WriteLine($"Student id is {student.Id}");
             Console.WriteLine("Succesfully added a student. {0} {1} studies {2}. His id is {3} and he is {4}\n", student.Name, student.Surname, student.Occupation, student.Id, student.Age);
@@ -57,10 +70,18 @@ do
             {
                 Console.WriteLine(studentList.Name);
             }
-
             break;
-
-        default: break;
+        case 3:
+            if (!File.Exists(filePath))
+            {
+                Console.WriteLine("Creating a new json file");
+                File.Create(filePath).Close();
+            }
+            var studentJson = JsonConvert.SerializeObject(students);
+            File.WriteAllText(filePath, studentJson, Encoding.UTF8);
+            break;
+        default:
+            break;
     }
     Console.WriteLine("Back to Menu? y/n");
     char c = char.Parse(Console.ReadLine());
