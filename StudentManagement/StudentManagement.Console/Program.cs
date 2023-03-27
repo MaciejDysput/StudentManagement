@@ -7,7 +7,9 @@ var students = new List<Student>();
 string name, surname, occupation;
 int age, id;
 
-string filePath = @"C:\Users\macie\source\repos\StudentManagement\file.json";
+//string filePath = @"C:\Users\macie\source\repos\StudentManagement\file.json";
+string fileName = @"..\file.json";
+string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
 if (File.Exists(filePath))
 {
     Console.WriteLine("The JSON file exists.");
