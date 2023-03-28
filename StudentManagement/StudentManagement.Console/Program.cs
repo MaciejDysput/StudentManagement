@@ -6,8 +6,6 @@ bool menu = true;
 var students = new List<Student>();
 string name, surname, occupation;
 int age, id;
-
-//string filePath = @"C:\Users\macie\source\repos\StudentManagement\file.json";
 string fileName = @"..\file.json";
 string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
 if (File.Exists(filePath))
@@ -20,13 +18,11 @@ else
 {
     Console.WriteLine("Json file doesn't exist");
 }
-
 do
 {
     Console.WriteLine("Press 1 to insert student");
     Console.WriteLine("Press 2 to display student info");
     Console.WriteLine("Press 3 to create a students list data");
-    Console.WriteLine("Press 4 to check a students list");
     Console.WriteLine("\nChoose Option");
     int option = int.Parse(Console.ReadLine());
 
@@ -40,7 +36,6 @@ do
                 Console.WriteLine("Name cannot be empty. Please enter your name:");
                 name = Console.ReadLine();
             }
-
             Console.WriteLine("Enter student surname");
             surname = Console.ReadLine();
             while (string.IsNullOrWhiteSpace(surname))
@@ -68,12 +63,10 @@ do
 
             break;
         case 2:
-
             Student[] arrayOfStudents = students.ToArray();
             for (int i = 0; i < arrayOfStudents.Length; i++)
             {
                 Console.WriteLine(arrayOfStudents[i].Name + " " + arrayOfStudents[i].Surname + " " + "studies" + " " + arrayOfStudents[i].Occupation + " " + "He is " + arrayOfStudents[i].Age + " " + "years old. His id is" + " " + arrayOfStudents[i].Id);
-
             }
             break;
         case 3:
